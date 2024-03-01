@@ -1,7 +1,7 @@
 
 const express = require('express')
 const app = express()
-const port = 8000
+const port = process.env.PORT || 4000;
 
 app.use(express.urlencoded({extends: true}))
 app.use(express.json())
