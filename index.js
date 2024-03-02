@@ -1,7 +1,7 @@
 
 const express = require('express')
 const app = express()
-const port = 8000
+const port = process.env.PORT || 10000;
 
 app.use(express.urlencoded({extends: true}))
 app.use(express.json())
@@ -17,9 +17,12 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 // const { default: mongoose } = require('mongoose');
 
 // you explicitly create the http server
-const server = require('http').createServer(app);
-server.listen(port);
+//const server = require('http').createServer(app);
+//server.listen(port);
 
+ app.listen(port, ()=>{
+   console.log('Server listening on port ' + port)
+ })
 
 const username = "krictthep";
 const password = encodeURIComponent("dewkub071");
