@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/db/create', cors(corsOptions) ,(req,res) => {
-
+    res.set('Access-Control-Allow-Origin', '*');
     console.log('/api/db/create')
     let form = req.body
     let data = {
@@ -95,6 +95,7 @@ app.post('/api/db/create', cors(corsOptions) ,(req,res) => {
 
 
 app.get('/api/db/read', cors(corsOptions), (req,res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   async function run() {
     try {
       console.log('/api/db/read')
@@ -122,7 +123,7 @@ app.get('/api/db/read', cors(corsOptions), (req,res) => {
 
 
 app.post('/api/db/update', cors(corsOptions), (req,res) => {
-
+  res.set('Access-Control-Allow-Origin', '*');
   console.log('/api/db/update')
   let form = req.body
   let data = {
