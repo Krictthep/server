@@ -2,6 +2,11 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 10000;
+const cors = require('cors')
+
+var corsOptions = {
+  origin: '*'
+}
 
 app.use(express.urlencoded({extends: true}))
 app.use(express.json())
@@ -39,7 +44,7 @@ app.get('/', (req, res) => {
   res.send('Connected Service')
 })
 
-app.post('/api/db/create', (req,res) => {
+app.post('/api/db/create', cors(corsOptions) ,(req,res) => {
 
     console.log('/api/db/create')
     let form = req.body
@@ -89,7 +94,7 @@ app.post('/api/db/create', (req,res) => {
 })
 
 
-app.get('/api/db/read', (req,res) => {
+app.get('/api/db/read', cors(corsOptions), (req,res) => {
   async function run() {
     try {
       console.log('/api/db/read')
@@ -116,7 +121,7 @@ app.get('/api/db/read', (req,res) => {
 })
 
 
-app.post('/api/db/update', (req,res) => {
+app.post('/api/db/update', cors(corsOptions), (req,res) => {
 
   console.log('/api/db/update')
   let form = req.body
