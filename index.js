@@ -216,7 +216,7 @@ app.post('/api/db/delete', cors(corsOptions), (req,res) => {
       var myquery = {_id: { $eq: new ObjectId(req.body._id)}};   
 
 
-      const resultDelete = await products.deleteOne( myquery);
+      const resultDelete = await products.deleteOne(myquery);
      
       if(resultDelete != null){     
         console.log('after resultDelete.matchedCount ' + resultDelete.matchedCount)   
