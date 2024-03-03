@@ -147,14 +147,7 @@ app.post('/api/db/update', cors(corsOptions), (req,res) => {
 
       console.log('before updateOne')
    
-      var search = {
-        $search: {           
-           "equals": {
-              "path": "_id",
-              "value": req.body._id              
-           }
-        }
-     }
+ 
       var myquery = {_id: { $eq: new ObjectId(req.body._id)}};     
    
       var newvalues = { $set: data };
@@ -200,9 +193,55 @@ app.post('/api/db/update', cors(corsOptions), (req,res) => {
     
 })
 
-// app.post('/api/db/delete', (req,res) => {
+
+
+app.post('/api/db/delete', cors(corsOptions), (req,res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  console.log('/api/db/delete')
+  let form = req.body
+
+
+  console.log("data " + data.name)
+  async function run() {
+    try {
+     
+      await client.connect();
+ 
+      const database = client.db('db1');
+      const products = database.collection('products');
+      // Query for a movie that has the title 'Back to the Future'     
+
+      const result = [];     
+
+      var myquery = {_id: { $eq: new ObjectId(req.body._id)}};   
+
+
+      const resultDelete = await products.deleteOne( myquery);
+     
+      if(resultDelete != null){     
+        console.log('after resultDelete.matchedCount ' + resultDelete.matchedCount)   
+          const findResult = products.find({});
+          for await (const doc of findResult) {       
+            result.push(doc)           
+          } 
+      }
+ 
+      res.send(result) 
+   
+      console.log(result)
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
+
+
+
+
     
-// })
+})
+
 
 // app.post('/api/db/paginate', (req,res) => {
     
