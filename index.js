@@ -200,8 +200,6 @@ app.post('/api/db/delete', cors(corsOptions), (req,res) => {
   console.log('/api/db/delete')
   let form = req.body
 
-
-  console.log("data " + data.name)
   async function run() {
     try {
      
